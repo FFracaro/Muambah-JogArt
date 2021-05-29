@@ -6,8 +6,8 @@ using TMPro;
 
 public class DialogManager : MonoBehaviour
 {
-    public TextMeshProUGUI NPC_name;
-    public TextMeshProUGUI dialogoText;
+    private TextMeshProUGUI NPC_name;
+    private TextMeshProUGUI dialogoText;
 
     public float velocidadeDialogo;
 
@@ -19,8 +19,11 @@ public class DialogManager : MonoBehaviour
         sentences = new Queue<string>();
     }
 
-    public void startDialogo(Dialogo dialogo)
+    public void startDialogo(Dialogo dialogo, TextMeshProUGUI NameField, TextMeshProUGUI TextField)
     {
+        NPC_name = NameField;
+        dialogoText = TextField;
+
         Debug.Log("Iniciando conversa com " + dialogo.name);
 
         NPC_name.text = dialogo.name;
@@ -36,7 +39,7 @@ public class DialogManager : MonoBehaviour
     }
 
     public void mostrarProximoDialogo()
-    {
+    {       
         if (sentences.Count == 0)
         {
             finalizarDialogo();
@@ -48,6 +51,11 @@ public class DialogManager : MonoBehaviour
             Debug.Log(sentence);
 
             StopAllCoroutines();
+
+            velocidadeDialogo = 0.1f;
+
+            if (sentence.Length > 20)
+                velocidadeDialogo = velocidadeDialogo / 3;
 
             StartCoroutine(digitarSentence(sentence));
         }
@@ -66,5 +74,6 @@ public class DialogManager : MonoBehaviour
     void finalizarDialogo()
     {
         Debug.Log("Final da conversa.");
+        FindObjectOfType<DialogNPC>().EndDialog();
     }
 }

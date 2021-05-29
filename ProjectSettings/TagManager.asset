@@ -14,6 +14,7 @@ TagManager:
   - PedresteAvoid
   - ResetRight
   - ResetLeft
+  - card
   layers:
   - Default
   - TransparentFX
