@@ -6,7 +6,6 @@ using UnityEngine;
 public class DialogNPC : MonoBehaviour
 {
     public GameObject RootDialog;
-    public Animator DialogBackground;
     public TextMeshProUGUI NameField;
     public TextMeshProUGUI TextField;
 
@@ -39,9 +38,8 @@ public class DialogNPC : MonoBehaviour
 
         if (DialogAction == PostDialogAction.NEXTDIALOG)
             EscolhaController.NextDialog();
-
-        if (DialogAction == PostDialogAction.ANIMATION)
-            EscolhaController.PlayAnimation();
+        else
+            EscolhaController.PlayAnimation(DialogAction);
 
         RootDialog.SetActive(false);
     }
@@ -49,5 +47,5 @@ public class DialogNPC : MonoBehaviour
 
 public enum PostDialogAction
 {
-    NEXTDIALOG, ANIMATION, NOTHING
+    NEXTDIALOG, ENTERCARDS, EXITCARDS, CHOOSECARD, NOTHING
 }

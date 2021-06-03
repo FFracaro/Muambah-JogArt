@@ -30,9 +30,16 @@ public class EscolhaCidadeController : MonoBehaviour
         DialogCount++;
     }
 
-    public void PlayAnimation()
+    public void PlayAnimation(PostDialogAction value)
     {
-        CardsAnimator.SetTrigger("PlayCardsAnimation");
+        if (value == PostDialogAction.ENTERCARDS)
+            CardsAnimator.Play("CardsEntrance");
+
+        if(value == PostDialogAction.EXITCARDS)
+            CardsAnimator.Play("CardsExit");
+
+        if (value == PostDialogAction.CHOOSECARD)
+            CardsAnimator.Play("CardsAnimation");
     }
 }
 
